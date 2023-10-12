@@ -1,0 +1,44 @@
+﻿@using static TaskManager.Logic.Infrastructure.Domain.Statuses;
+@using static TaskManager.Logic.Infrastructure.Domain.Priorities;
+@model TaskManager.Logic.Service.Tasks.Dto.Task_dtod
+@{
+    ViewData["Title"] = "Task";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Edit Task</h2>
+        <a asp-controller="Task" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Delete Task</a>
+
+        <input hidden asp-for="@Model.Id" />
+        <a asp-controller="Task" asp-action="TaskList" class="btn btn-outline-primary">Back</a>
+        <hr />
+        <form asp-controller="Task" asp-action="Edit">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input asp-for="Title" class="form-control" placeholder="Title...">
+                @Html.ValidationMessageFor(m => m.Title,null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="Status">Status</label>
+                <select asp-for="Status" class="form-control" asp-items="@Html.GetEnumSelectList<Status>()"> </select>
+            </div>
+            <div class="form-group">
+                <label for="Priority">Priority</label>
+                <select asp-for="Priority" class="form-control" asp-items="@Html.GetEnumSelectList<Priority>()"> </select>
+            </div>
+            <div class="form-group">
+                <label for="title">DueDate</label>
+                <input asp-for="DueDate" class="form-control" placeholder="Title...">
+                @Html.ValidationMessageFor(m => m.DueDate,null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <textarea class="form-control" rows="3" asp-for="Description" placeholder="Description"></textarea>
+                @Html.ValidationMessageFor(m => m.Description,null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

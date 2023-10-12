@@ -1,0 +1,43 @@
+﻿@model TaskManager.Logic.Service.Authentication.Dto.User_dtod
+@{
+    ViewData["Title"] = "User";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Edit info</h2>
+        <a asp-controller="Authentication" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Delete User</a>
+        <a asp-controller="Authentication" asp-action="UserList" class="btn btn-outline-primary">Back</a>
+        <hr />
+        <input hidden asp-for="@Model.Id" />
+        <form asp-controller="Authentication" asp-action="Edit">
+            <div class="form-group">
+                <label for="title">First Name</label>
+                <input asp-for="FirstName" class="form-control" placeholder="FirstName">
+                @Html.ValidationMessageFor(m => m.FirstName,null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group"> 
+                <label for="title">Last Name</label>
+                <input asp-for="LastName" class="form-control" placeholder="LastName">
+                @Html.ValidationMessageFor(m => m.LastName,null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="title">UserName</label>
+                <input asp-for="UserName" class="form-control" placeholder="UserName">
+                @Html.ValidationMessageFor(m => m.UserName,null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="title">Password</label>
+                <input asp-for="Password" class="form-control" placeholder="Password">
+                @Html.ValidationMessageFor(m => m.Password,null, new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="title">Email</label>
+                <input asp-for="Email" class="form-control" placeholder="Email">
+                @Html.ValidationMessageFor(m => m.Email,null, new { @class = "text-danger" })
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

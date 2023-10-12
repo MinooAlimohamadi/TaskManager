@@ -1,0 +1,64 @@
+﻿@model List<TaskManager.Logic.Service.Tasks.Dto.Task_dto>
+@{
+    ViewData["Title"] = "Task";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Task Manager</h2>
+        <a asp-controller="Task" asp-action="Create" class="btn btn-outline-primary">Create Task</a>
+        <div class="text-center">
+            <hr />
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Priority</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var i = 1;
+                    }
+                    @foreach (var task in Model)
+                    {
+                        <tr>
+
+                            <th scope="row">@i</th>
+                            <td>@task.Title</td>
+                            @if (task.Priority == TaskManager.Logic.Infrastructure.Domain.Priorities.Priority.low)
+                            {
+                                <td class="text-primary">@task.Priority</td>
+                            }
+                            @if (task.Priority == TaskManager.Logic.Infrastructure.Domain.Priorities.Priority.Normal)
+                            {
+                                <td class="text-warning">@task.Priority</td>
+                            }
+                            @if (task.Priority == TaskManager.Logic.Infrastructure.Domain.Priorities.Priority.High)
+                            {
+                                <td class="text-danger">@task.Priority</td>
+                            }
+                            @if (task.Status == TaskManager.Logic.Infrastructure.Domain.Statuses.Status.completed)
+                            {
+                                <td class="text-success">@task.Status</td>
+                            }
+                            @if (task.Status == TaskManager.Logic.Infrastructure.Domain.Statuses.Status.incomplete)
+                            {
+                                <td class="text-warning">@task.Status</td>
+                            }
+                            @if (task.Status == TaskManager.Logic.Infrastructure.Domain.Statuses.Status.overdue)
+                            {
+                                <td class="text-danger">@task.Status</td>
+                            }
+                            <td> <a asp-controller="Task" asp-action="Edit" asp-route-id="@task.Id" class="btn btn-outline-info">Edit</a> </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
